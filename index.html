@@ -23,6 +23,87 @@
             padding: 12px;
         }
 
+        /* Экран загрузки */
+        .loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 10%, #2a2f3a 0%, #0a0d13 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .loader-wrapper.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+            color: white;
+        }
+
+        .loader-spinner {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(255,255,255,0.1);
+            border-top: 4px solid #a5b3c9;
+            border-right: 4px solid #6a7a9e;
+            border-radius: 50%;
+            animation: spin 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+            margin: 0 auto 30px;
+            box-shadow: 0 0 30px rgba(165, 179, 201, 0.3);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loader-text {
+            font-size: 2rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #e8eef5 0%, #a5b3c9 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+
+        .loader-sub {
+            color: #8a9bb5;
+            font-size: 1rem;
+            letter-spacing: 2px;
+        }
+
+        /* Основной контент (изначально скрыт) */
+        .main-content {
+            opacity: 0;
+            transition: opacity 1s ease;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-content.visible {
+            opacity: 1;
+        }
+
         /* Основной стеклянный контейнер */
         .glass-panel {
             background: rgba(45, 50, 60, 0.25);
@@ -298,7 +379,7 @@
             font-size: clamp(1.2rem, 5vw, 1.6rem);
         }
 
-        /* подвал - изменено на мишаня.продакшн */
+        /* подвал */
         .footer-note {
             margin-top: 20px;
             text-align: center;
@@ -323,7 +404,7 @@
             text-shadow: 0 0 8px rgba(100, 150, 255, 0.5);
         }
 
-        /* Анимация мерцания для spinning (только при кручении) */
+        /* Анимация мерцания для определения */
         @keyframes pulseGlow {
             0% { text-shadow: 0 0 5px rgba(210, 230, 255, 0.3); }
             50% { text-shadow: 0 0 25px rgba(210, 230, 255, 0.9); }
@@ -383,7 +464,7 @@
             }
             
             .wheel-container {
-                margin-bottom: 15px;
+                padding: 12px;
             }
             
             .result-text {
@@ -393,67 +474,79 @@
     </style>
 </head>
 <body>
-    <div class="glass-panel">
-        <div class="title-section">
-            <h1>ДИМА БУЧИН</h1>
-            <div class="subtitle">
-                <i class="fas fa-dice"></i> рулетка хуйни <i class="fas fa-dice"></i>
-            </div>
+    <!-- Экран загрузки -->
+    <div class="loader-wrapper" id="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <div class="loader-text">BuchinWeb</div>
+            <div class="loader-sub">мишаня.продакшн</div>
         </div>
+    </div>
 
-        <div class="hero">
-            <div class="avatar">
-                <i class="fas fa-crown"></i>
-            </div>
-            <div class="name-info">
-                <h2>Дима Бучин</h2>
-                <p><i class="fas fa-star"></i> рандом ученик 9а класса <i class="fas fa-star"></i></p>
-            </div>
-        </div>
-
-        <!-- Таймер -->
-        <div class="timer-container">
-            <div class="timer-label">
-                <i class="fas fa-hourglass-half"></i> Следующее кручение через
-            </div>
-            <div class="timer-display" id="timerDisplay">
-                <i class="fas fa-clock"></i> 12:00:00
-            </div>
-        </div>
-
-        <div class="wheel-container">
-            <div class="wheel-display" id="wheelDisplay">
-                <div class="result-text" id="resultText">
-                    <i class="fas fa-bolt"></i>
-                    <i class="fas fa-hourglass-half"></i>
-                    <i class="fas fa-bolt"></i>
-                </div>
-                <div class="result-sub" id="resultSub">
-                    <i class="fas fa-hand-pointer"></i> крути рулетку, пацан
+    <!-- Основной контент -->
+    <div class="main-content" id="mainContent">
+        <div class="glass-panel">
+            <div class="title-section">
+                <h1>ДИМА БУЧИН</h1>
+                <div class="subtitle">
+                    <i class="fas fa-dice"></i> рулетка хуйни <i class="fas fa-dice"></i>
                 </div>
             </div>
 
-            <div class="spin-button">
-                <button id="spinBtn">
-                    <i class="fas fa-sync-alt"></i> Крутить <i class="fas fa-arrow-right"></i>
-                </button>
+            <div class="hero">
+                <div class="avatar">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div class="name-info">
+                    <h2>Дима Бучин</h2>
+                    <p><i class="fas fa-star"></i> рандом ученик 9а класса <i class="fas fa-star"></i></p>
+                </div>
             </div>
-        </div>
 
-        <div class="status-bar">
-            <div class="status-item">
-                <i class="fas fa-history"></i> Последний: <span id="lastResult"><i class="fas fa-question"></i></span>
+            <!-- Таймер -->
+            <div class="timer-container">
+                <div class="timer-label">
+                    <i class="fas fa-hourglass-half"></i> Следующее узнавание через
+                </div>
+                <div class="timer-display" id="timerDisplay">
+                    <i class="fas fa-clock"></i> --:--:--
+                </div>
             </div>
-            <div class="status-item">
-                <i class="fas fa-balance-scale"></i> Вердикт: <span id="verdictGlow"><i class="fas fa-bolt"></i></span>
-            </div>
-        </div>
 
-        <!-- Изменено на мишаня.продакшн -->
-        <div class="footer-note">
-            <i class="fas fa-copyright"></i>
-            <span class="brand">мишаня.продакшн</span>
-            <i class="fas fa-registered"></i>
+            <div class="wheel-container">
+                <div class="wheel-display" id="wheelDisplay">
+                    <!-- Изначально скрыто, показываем призыв к действию -->
+                    <div class="result-text" id="resultText">
+                        <i class="fas fa-question"></i>
+                        <i class="fas fa-question"></i>
+                        <i class="fas fa-question"></i>
+                    </div>
+                    <div class="result-sub" id="resultSub">
+                        <i class="fas fa-hand-pointer"></i> нажми, чтобы узнать кто ты на сегодня
+                    </div>
+                </div>
+
+                <div class="spin-button">
+                    <button id="spinBtn">
+                        <i class="fas fa-sync-alt"></i> Узнать <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="status-bar">
+                <div class="status-item">
+                    <i class="fas fa-history"></i> Последний: <span id="lastResult"><i class="fas fa-question"></i></span>
+                </div>
+                <div class="status-item">
+                    <i class="fas fa-balance-scale"></i> Вердикт: <span id="verdictGlow"><i class="fas fa-question"></i></span>
+                </div>
+            </div>
+
+            <div class="footer-note">
+                <i class="fas fa-copyright"></i>
+                <span class="brand">мишаня.продакшн</span>
+                <i class="fas fa-registered"></i>
+            </div>
         </div>
     </div>
 
@@ -478,6 +571,10 @@
             const verdictGlowEl = document.getElementById('verdictGlow');
             const spinBtn = document.getElementById('spinBtn');
             const timerDisplay = document.getElementById('timerDisplay');
+            
+            // Элементы загрузки
+            const loader = document.getElementById('loader');
+            const mainContent = document.getElementById('mainContent');
 
             let lastOutcome = null;
             let timerInterval = null;
@@ -486,6 +583,9 @@
             const STORAGE_KEY = 'buchin_last_spin_time';
             const COOLDOWN_HOURS = 12;
             const COOLDOWN_MS = COOLDOWN_HOURS * 60 * 60 * 1000;
+
+            // Флаг, был ли уже таймер запущен
+            let timerStarted = false;
 
             // Функция для получения случайного элемента
             function getRandomOutcome() {
@@ -554,11 +654,21 @@
             // Сохранение времени кручения
             function saveSpinTime() {
                 localStorage.setItem(STORAGE_KEY, Date.now().toString());
-                startTimer(); // Перезапускаем таймер
+                
+                // Запускаем таймер ТОЛЬКО после первого нажатия
+                if (!timerStarted) {
+                    timerStarted = true;
+                    startTimer();
+                } else {
+                    // Если таймер уже был запущен, просто обновляем
+                    updateTimerAndButton();
+                }
             }
 
             // Функция обновления интерфейса при кручении
             function spinWheel() {
+                console.log('Кнопка нажата!'); // Для отладки
+                
                 if (!canSpin()) {
                     // Если ещё нельзя крутить, показываем сообщение
                     resultSubEl.innerHTML = '<i class="fas fa-exclamation-triangle" style="color: #ff3b30;"></i> Подожди 12 часов!';
@@ -567,7 +677,7 @@
 
                 // Добавляем класс анимации
                 resultTextEl.classList.add('spinning');
-                resultSubEl.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> решает судьбу...';
+                resultSubEl.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Определяем твою кликуху на день...';
 
                 // Блокируем кнопку на время "кручения"
                 spinBtn.disabled = true;
@@ -581,7 +691,7 @@
                     resultTextEl.innerHTML = outcome.fullDisplay;
                     
                     // Обновляем подпись
-                    resultSubEl.innerHTML = '<i class="fas fa-check-circle"></i> судьба Димы Бучина решена';
+                    resultSubEl.innerHTML = '<i class="fas fa-check-circle"></i> твоя кликуха на сегодня определена';
                     
                     // Обновляем статус-бар (последний результат - иконка)
                     lastResultEl.innerHTML = `<i class="fas ${outcome.icon}"></i>`;
@@ -596,46 +706,64 @@
                     // Убираем анимацию
                     resultTextEl.classList.remove('spinning');
                     
-                    // Сохраняем время кручения и запускаем таймер
+                    // Сохраняем время кручения (таймер запустится ТОЛЬКО здесь)
                     saveSpinTime();
                     
                 }, 800); // 0.8 секунды эффекта
             }
 
-            // Назначаем обработчик на кнопку
-            spinBtn.addEventListener('click', spinWheel);
+            // Назначаем обработчик на кнопку - УБЕДИМСЯ, ЧТО ОН НАЗНАЧЕН ПРАВИЛЬНО
+            if (spinBtn) {
+                spinBtn.addEventListener('click', spinWheel);
+                console.log('Обработчик назначен'); // Для отладки
+            } else {
+                console.error('Кнопка не найдена!');
+            }
 
             // Для мобильных устройств убираем hover эффекты
             if ('ontouchstart' in window) {
                 document.querySelectorAll('button').forEach(btn => {
-                    btn.addEventListener('touchstart', function() {
-                        // просто убираем hover-эффекты
+                    btn.addEventListener('touchstart', function(e) {
+                        // Просто предотвращаем стандартное поведение
                     });
                 });
             }
 
-            // Инициализация при загрузке
-            function init() {
+            // Загрузка сайта с экраном загрузки
+            window.addEventListener('load', function() {
+                console.log('Страница загружена'); // Для отладки
+                
+                // Устанавливаем начальные значения
+                resultTextEl.innerHTML = '<i class="fas fa-question"></i> <i class="fas fa-question"></i> <i class="fas fa-question"></i>';
+                resultSubEl.innerHTML = '<i class="fas fa-hand-pointer"></i> нажми, чтобы узнать кто ты на сегодня';
+                lastResultEl.innerHTML = '<i class="fas fa-question"></i>';
+                verdictGlowEl.innerHTML = '<i class="fas fa-question"></i>';
+                
                 // Проверяем, можно ли крутить
                 if (!canSpin()) {
+                    // Если есть сохранённое время, но таймер ещё не запущен
                     spinBtn.disabled = true;
-                }
-                
-                // Запускаем таймер
-                startTimer();
-                
-                // Показываем случайный начальный результат (но без сохранения времени)
-                const initial = outcomes[Math.floor(Math.random() * outcomes.length)];
-                resultTextEl.innerHTML = initial.fullDisplay;
-                lastResultEl.innerHTML = `<i class="fas ${initial.icon}"></i>`;
-                if (initial.type === 'good') {
-                    verdictGlowEl.innerHTML = '<i class="fas fa-check-circle" style="color: #4cd964;"></i>';
+                    timerDisplay.innerHTML = '<i class="fas fa-hourglass-half"></i> Ожидание...';
                 } else {
-                    verdictGlowEl.innerHTML = '<i class="fas fa-times-circle" style="color: #ff3b30;"></i>';
+                    spinBtn.disabled = false;
+                    timerDisplay.innerHTML = '<i class="fas fa-check-circle" style="color: #4cd964;"></i> ГОТОВО!';
                 }
-            }
+                
+                // Показываем загрузку 2.5 секунды
+                setTimeout(function() {
+                    loader.classList.add('hidden');
+                    mainContent.classList.add('visible');
+                }, 2500);
+            });
 
-            init();
+            // Дополнительная проверка, что кнопка не заблокирована по умолчанию
+            // Это перестраховка
+            setTimeout(function() {
+                if (spinBtn && canSpin()) {
+                    spinBtn.disabled = false;
+                    console.log('Кнопка разблокирована');
+                }
+            }, 3000);
         })();
     </script>
 </body>
