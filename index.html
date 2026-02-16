@@ -21,6 +21,11 @@
             justify-content: center;
             align-items: center;
             padding: 12px;
+            transition: background 0.5s ease;
+        }
+
+        body.love-mode {
+            background: radial-gradient(circle at 30% 10%, #fce4e9 0%, #f8d1da 100%);
         }
 
         /* Экран загрузки */
@@ -104,6 +109,180 @@
             opacity: 1;
         }
 
+        /* Вкладки */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .tab {
+            background: rgba(45, 50, 60, 0.25);
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            border: 1px solid rgba(220, 230, 255, 0.15);
+            border-radius: 60px;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #dfe7f5;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 20px -8px rgba(0,0,0,0.3);
+        }
+
+        .tab i {
+            font-size: 1.3rem;
+        }
+
+        .tab:hover {
+            transform: translateY(-2px);
+            background: rgba(65, 75, 95, 0.35);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .tab.active {
+            background: rgba(80, 95, 120, 0.4);
+            border-color: rgba(255,255,255,0.4);
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+
+        /* Стили для любовной вкладки (мягкий и приятный розовый) */
+        .love-mode .tab {
+            background: rgba(247, 192, 203, 0.3);
+            border-color: rgba(235, 150, 170, 0.4);
+            color: #c45d7a;
+            text-shadow: 0 0 8px rgba(255, 230, 240, 0.5);
+        }
+
+        .love-mode .tab.active {
+            background: rgba(242, 172, 187, 0.4);
+            border-color: rgba(226, 130, 155, 0.5);
+            box-shadow: 0 0 25px rgba(235, 150, 170, 0.4);
+        }
+
+        .love-mode .glass-panel {
+            background: rgba(251, 222, 229, 0.2);
+            border-color: rgba(235, 170, 185, 0.25);
+        }
+
+        .love-mode .title-section h1 {
+            background: linear-gradient(135deg, #e28a9e 0%, #c45d7a 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(226, 138, 158, 0.3);
+        }
+
+        .love-mode .title-section .subtitle {
+            color: #c06983;
+            border-bottom-color: rgba(196, 93, 122, 0.2);
+            font-weight: 400;
+        }
+
+        .love-mode .hero {
+            background: rgba(247, 202, 214, 0.2);
+            border-color: rgba(226, 150, 170, 0.25);
+        }
+
+        .love-mode .avatar {
+            background: linear-gradient(145deg, #eeb0bf, #d989a3);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 20px -5px rgba(196, 93, 122, 0.3);
+        }
+
+        .love-mode .name-info h2 {
+            color: #b34e6b;
+            text-shadow: 0 0 5px rgba(255, 240, 245, 0.3);
+        }
+
+        .love-mode .name-info p {
+            color: #c45d7a;
+        }
+
+        .love-mode .wheel-display {
+            background: #fbe6ec;
+            border-color: #f0c0cf;
+            box-shadow: 0 0 0 2px #e9b0c0, 0 15px 30px -10px #c45d7a;
+        }
+
+        .love-mode .result-text {
+            color: #a53f5b;
+            text-shadow: 0 0 12px rgba(196, 93, 122, 0.4);
+            font-weight: 900;
+        }
+
+        .love-mode .result-sub {
+            color: #c45d7a;
+            font-weight: 500;
+        }
+
+        .love-mode .timer-container {
+            background: rgba(247, 202, 214, 0.2);
+            border-color: rgba(226, 150, 170, 0.25);
+        }
+
+        .love-mode .timer-label {
+            color: #b34e6b;
+            font-weight: 500;
+        }
+
+        .love-mode .timer-display {
+            color: #a53f5b;
+            text-shadow: 0 0 10px rgba(196, 93, 122, 0.3);
+        }
+
+        .love-mode .timer-display i {
+            color: #c45d7a;
+        }
+
+        .love-mode button {
+            background: rgba(242, 182, 197, 0.3);
+            border-color: rgba(216, 130, 155, 0.35);
+            color: #b34e6b;
+            font-weight: 700;
+            box-shadow: 0 15px 25px -8px rgba(165, 63, 91, 0.2), 0 4px 0 #e9b0c0 inset, 0 -2px 0 #f0c0cf inset;
+        }
+
+        .love-mode button:hover {
+            background: rgba(235, 162, 182, 0.4);
+            border-color: rgba(201, 110, 140, 0.45);
+            box-shadow: 0 15px 30px -5px rgba(165, 63, 91, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .love-mode .status-item {
+            background: rgba(247, 202, 214, 0.2);
+            border-color: rgba(226, 150, 170, 0.25);
+            color: #b34e6b;
+        }
+
+        .love-mode .status-item span {
+            color: #a53f5b;
+        }
+
+        .love-mode .status-item i {
+            color: #c45d7a;
+        }
+
+        .love-mode .footer-note {
+            color: #b34e6b;
+        }
+
+        .love-mode .footer-note .brand {
+            color: #a53f5b;
+            text-shadow: 0 0 8px rgba(196, 93, 122, 0.3);
+        }
+
+        .love-mode .footer-note i {
+            color: #c45d7a;
+        }
+
         /* Основной стеклянный контейнер */
         .glass-panel {
             background: rgba(45, 50, 60, 0.25);
@@ -116,6 +295,7 @@
             max-width: 800px;
             width: 100%;
             animation: fadeIn 0.8s ease-out;
+            transition: all 0.5s ease;
         }
 
         @keyframes fadeIn {
@@ -416,6 +596,11 @@
             color: #ffffff;
         }
 
+        .love-mode .result-text.spinning {
+            animation: pulseGlow 0.6s infinite;
+            color: #a53f5b;
+        }
+
         /* Адаптация для маленьких экранов */
         @media (max-width: 480px) {
             .glass-panel {
@@ -446,6 +631,15 @@
             .status-item {
                 justify-content: flex-start;
                 padding: 12px;
+            }
+            
+            .tabs {
+                gap: 8px;
+            }
+            
+            .tab {
+                padding: 8px 20px;
+                font-size: 1rem;
             }
         }
 
@@ -486,26 +680,36 @@
     <!-- Основной контент -->
     <div class="main-content" id="mainContent">
         <div class="glass-panel">
+            <!-- Вкладки -->
+            <div class="tabs">
+                <div class="tab active" id="tabMain">
+                    <i class="fas fa-dice"></i> Основное
+                </div>
+                <div class="tab" id="tabLove">
+                    <i class="fas fa-heart"></i> Любовное
+                </div>
+            </div>
+
             <div class="title-section">
-                <h1>ДИМА БУЧИН</h1>
-                <div class="subtitle">
+                <h1 id="mainTitle">ДИМА БУЧИН</h1>
+                <div class="subtitle" id="subtitle">
                     <i class="fas fa-dice"></i> рулетка хуйни <i class="fas fa-dice"></i>
                 </div>
             </div>
 
             <div class="hero">
-                <div class="avatar">
+                <div class="avatar" id="avatar">
                     <i class="fas fa-crown"></i>
                 </div>
                 <div class="name-info">
-                    <h2>Дима Бучин</h2>
-                    <p><i class="fas fa-star"></i> рандом ученик 9а класса <i class="fas fa-star"></i></p>
+                    <h2 id="heroName">Дима Бучин</h2>
+                    <p id="heroDesc"><i class="fas fa-star"></i> рандом ученик 9а класса <i class="fas fa-star"></i></p>
                 </div>
             </div>
 
             <!-- Таймер -->
             <div class="timer-container">
-                <div class="timer-label">
+                <div class="timer-label" id="timerLabel">
                     <i class="fas fa-hourglass-half"></i> Следующее узнавание через
                 </div>
                 <div class="timer-display" id="timerDisplay">
@@ -552,25 +756,47 @@
 
     <script>
         (function() {
-            // 6 кличек: 3 плохих, 3 хороших
-            const outcomes = [
+            // 7 кличек для основной вкладки: 3 плохих, 4 хороших
+            const mainOutcomes = [
                 // Плохие (3 штуки)
                 { text: "ЛОХ", icon: "fa-face-frown", fullDisplay: '<i class="fas fa-face-frown"></i> ЛОХ <i class="fas fa-droplet"></i>', value: "loch", type: "bad" },
                 { text: "ПЕДИК", icon: "fa-rainbow", fullDisplay: '<i class="fas fa-rainbow"></i> ПЕДИК <i class="fas fa-rainbow"></i>', value: "pedik", type: "bad" },
                 { text: "КУКОЛД", icon: "fa-horn-ram", fullDisplay: '<i class="fas fa-horn-ram"></i> КУКОЛД <i class="fas fa-horn-ram"></i>', value: "cuckold", type: "bad" },
                 
-                // Хорошие (3 штуки)
+                // Хорошие (4 штуки)
                 { text: "КОРОЛЬ", icon: "fa-crown", fullDisplay: '<i class="fas fa-crown"></i> КОРОЛЬ <i class="fas fa-crown"></i>', value: "king", type: "good" },
                 { text: "ПАЦАН", icon: "fa-hat-cowboy", fullDisplay: '<i class="fas fa-hat-cowboy"></i> ПАЦАН <i class="fas fa-fire"></i>', value: "pacan", type: "good" },
-                { text: "КРАСАВЧИК", icon: "fa-face-smile-wink", fullDisplay: '<i class="fas fa-face-smile-wink"></i> КРАСАВЧИК <i class="fas fa-heart"></i>', value: "handsome", type: "good" }
+                { text: "КРАСАВЧИК", icon: "fa-face-smile-wink", fullDisplay: '<i class="fas fa-face-smile-wink"></i> КРАСАВЧИК <i class="fas fa-heart"></i>', value: "handsome", type: "good" },
+                { text: "СЕКС-СИМВОЛ", icon: "fa-heart", fullDisplay: '<i class="fas fa-heart" style="color: #c45d7a;"></i> СЕКС-СИМВОЛ <i class="fas fa-heart" style="color: #c45d7a;"></i>', value: "sexsymbol", type: "good" }
             ];
 
+            // 6 девушек для любовной вкладки
+            const loveOutcomes = [
+                { text: "КОПТЮК", icon: "fa-female", fullDisplay: '<i class="fas fa-female" style="color: #c45d7a;"></i> КОПТЮК <i class="fas fa-female" style="color: #c45d7a;"></i>', value: "koptuk", type: "girl" },
+                { text: "ИЦКОВА", icon: "fa-female", fullDisplay: '<i class="fas fa-female" style="color: #c45d7a;"></i> ИЦКОВА <i class="fas fa-female" style="color: #c45d7a;"></i>', value: "itskova", type: "girl" },
+                { text: "ВАРЯ", icon: "fa-female", fullDisplay: '<i class="fas fa-female" style="color: #c45d7a;"></i> ВАРЯ <i class="fas fa-female" style="color: #c45d7a;"></i>', value: "varya", type: "girl" },
+                { text: "ЛИЗА БРО", icon: "fa-female", fullDisplay: '<i class="fas fa-female" style="color: #c45d7a;"></i> ЛИЗА БРО <i class="fas fa-female" style="color: #c45d7a;"></i>', value: "liza", type: "girl" },
+                { text: "МИЛАНА", icon: "fa-female", fullDisplay: '<i class="fas fa-female" style="color: #c45d7a;"></i> МИЛАНА <i class="fas fa-female" style="color: #c45d7a;"></i>', value: "milana", type: "girl" },
+                { text: "ВИКА", icon: "fa-female", fullDisplay: '<i class="fas fa-female" style="color: #c45d7a;"></i> ВИКА <i class="fas fa-female" style="color: #c45d7a;"></i>', value: "vika", type: "girl" }
+            ];
+
+            // Элементы DOM
             const resultTextEl = document.getElementById('resultText');
             const resultSubEl = document.getElementById('resultSub');
             const lastResultEl = document.getElementById('lastResult');
             const verdictGlowEl = document.getElementById('verdictGlow');
             const spinBtn = document.getElementById('spinBtn');
             const timerDisplay = document.getElementById('timerDisplay');
+            const timerLabel = document.getElementById('timerLabel');
+            const mainTitle = document.getElementById('mainTitle');
+            const subtitle = document.getElementById('subtitle');
+            const avatar = document.getElementById('avatar');
+            const heroName = document.getElementById('heroName');
+            const heroDesc = document.getElementById('heroDesc');
+            
+            // Элементы вкладок
+            const tabMain = document.getElementById('tabMain');
+            const tabLove = document.getElementById('tabLove');
             
             // Элементы загрузки
             const loader = document.getElementById('loader');
@@ -579,22 +805,51 @@
             let lastOutcome = null;
             let timerInterval = null;
             
-            // Ключ для localStorage
-            const STORAGE_KEY = 'buchin_last_spin_time';
+            // Текущая вкладка
+            let currentTab = 'main';
+            
+            // Ключи для localStorage - РАЗДЕЛЬНЫЕ ДЛЯ КАЖДОЙ ВКЛАДКИ
+            const MAIN_STORAGE_KEY = 'buchin_main_last_spin_time';
+            const LOVE_STORAGE_KEY = 'buchin_love_last_spin_time';
+            
+            const LAST_RESULT_KEY = 'buchin_last_result';
+            const LAST_VERDICT_KEY = 'buchin_last_verdict';
+            const CURRENT_TAB_KEY = 'buchin_current_tab';
+            const LOVE_LAST_RESULT_KEY = 'love_last_result';
+            
             const COOLDOWN_HOURS = 12;
             const COOLDOWN_MS = COOLDOWN_HOURS * 60 * 60 * 1000;
 
             // Флаг, был ли уже таймер запущен
             let timerStarted = false;
 
-            // Функция для получения случайного элемента
+            // Функция для получения случайного элемента в зависимости от вкладки
             function getRandomOutcome() {
-                return outcomes[Math.floor(Math.random() * outcomes.length)];
+                if (currentTab === 'main') {
+                    return mainOutcomes[Math.floor(Math.random() * mainOutcomes.length)];
+                } else {
+                    return loveOutcomes[Math.floor(Math.random() * loveOutcomes.length)];
+                }
+            }
+
+            // Найти outcome по value для текущей вкладки
+            function findOutcomeByValue(value) {
+                if (currentTab === 'main') {
+                    return mainOutcomes.find(o => o.value === value) || null;
+                } else {
+                    return loveOutcomes.find(o => o.value === value) || null;
+                }
+            }
+
+            // Получить ключ для времени в зависимости от вкладки
+            function getStorageKey() {
+                return currentTab === 'main' ? MAIN_STORAGE_KEY : LOVE_STORAGE_KEY;
             }
 
             // Проверка, можно ли крутить
             function canSpin() {
-                const lastSpinTime = localStorage.getItem(STORAGE_KEY);
+                const storageKey = getStorageKey();
+                const lastSpinTime = localStorage.getItem(storageKey);
                 if (!lastSpinTime) return true;
                 
                 const now = Date.now();
@@ -604,7 +859,8 @@
 
             // Получение оставшегося времени в мс
             function getRemainingTime() {
-                const lastSpinTime = localStorage.getItem(STORAGE_KEY);
+                const storageKey = getStorageKey();
+                const lastSpinTime = localStorage.getItem(storageKey);
                 if (!lastSpinTime) return 0;
                 
                 const now = Date.now();
@@ -651,18 +907,163 @@
                 }, 1000);
             }
 
-            // Сохранение времени кручения
-            function saveSpinTime() {
-                localStorage.setItem(STORAGE_KEY, Date.now().toString());
+            // Сохранение времени кручения и результата
+            function saveSpinData(outcome) {
+                const storageKey = getStorageKey();
+                localStorage.setItem(storageKey, Date.now().toString());
                 
-                // Запускаем таймер ТОЛЬКО после первого нажатия
+                if (currentTab === 'main') {
+                    localStorage.setItem(LAST_RESULT_KEY, outcome.value);
+                    localStorage.setItem(LAST_VERDICT_KEY, outcome.type);
+                } else {
+                    localStorage.setItem(LOVE_LAST_RESULT_KEY, outcome.value);
+                }
+                
+                // Запускаем таймер
                 if (!timerStarted) {
                     timerStarted = true;
                     startTimer();
                 } else {
-                    // Если таймер уже был запущен, просто обновляем
                     updateTimerAndButton();
                 }
+            }
+
+            // Загрузка сохранённых данных для текущей вкладки
+            function loadSavedData() {
+                if (currentTab === 'main') {
+                    const savedResult = localStorage.getItem(LAST_RESULT_KEY);
+                    const savedVerdict = localStorage.getItem(LAST_VERDICT_KEY);
+                    
+                    if (savedResult && savedVerdict) {
+                        const outcome = mainOutcomes.find(o => o.value === savedResult);
+                        if (outcome) {
+                            // Показываем сохранённый результат
+                            resultTextEl.innerHTML = outcome.fullDisplay;
+                            // Показываем имя/кличку в "Последний"
+                            lastResultEl.innerHTML = outcome.text;
+                            
+                            if (savedVerdict === 'good') {
+                                verdictGlowEl.innerHTML = '<i class="fas fa-check-circle" style="color: #4cd964;"></i> <i class="fas fa-thumbs-up" style="color: #4cd964;"></i>';
+                            } else {
+                                verdictGlowEl.innerHTML = '<i class="fas fa-times-circle" style="color: #ff3b30;"></i> <i class="fas fa-thumbs-down" style="color: #ff3b30;"></i>';
+                            }
+                            
+                            return true;
+                        }
+                    }
+                } else {
+                    const savedResult = localStorage.getItem(LOVE_LAST_RESULT_KEY);
+                    
+                    if (savedResult) {
+                        const outcome = loveOutcomes.find(o => o.value === savedResult);
+                        if (outcome) {
+                            // Показываем сохранённый результат
+                            resultTextEl.innerHTML = outcome.fullDisplay;
+                            // Показываем имя в "Последний"
+                            lastResultEl.innerHTML = outcome.text;
+                            verdictGlowEl.innerHTML = '<i class="fas fa-heart" style="color: #c45d7a;"></i> <i class="fas fa-heart" style="color: #c45d7a;"></i>';
+                            
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+
+            // Обновление таймера при переключении вкладки
+            function updateTimerForCurrentTab() {
+                // Сбрасываем флаг таймера при переключении вкладки
+                timerStarted = false;
+                if (timerInterval) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                }
+                
+                // Проверяем, можно ли крутить
+                if (!canSpin()) {
+                    // Если есть сохранённое время и оно ещё не прошло
+                    spinBtn.disabled = true;
+                    
+                    // Показываем оставшееся время
+                    const remaining = getRemainingTime();
+                    if (remaining > 0) {
+                        timerDisplay.innerHTML = `<i class="fas fa-hourglass-half"></i> ${formatTime(remaining)}`;
+                        
+                        // Запускаем таймер, если время ещё идёт
+                        timerStarted = true;
+                        startTimer();
+                    } else {
+                        timerDisplay.innerHTML = '<i class="fas fa-check-circle" style="color: #4cd964;"></i> ГОТОВО!';
+                        spinBtn.disabled = false;
+                    }
+                } else {
+                    spinBtn.disabled = false;
+                    timerDisplay.innerHTML = '<i class="fas fa-check-circle" style="color: #4cd964;"></i> ГОТОВО!';
+                }
+            }
+
+            // Переключение на основную вкладку
+            function switchToMainTab() {
+                currentTab = 'main';
+                localStorage.setItem(CURRENT_TAB_KEY, 'main');
+                
+                // Обновляем UI
+                document.body.classList.remove('love-mode');
+                tabMain.classList.add('active');
+                tabLove.classList.remove('active');
+                
+                mainTitle.textContent = 'ДИМА БУЧИН';
+                subtitle.innerHTML = '<i class="fas fa-dice"></i> рулетка хуйни <i class="fas fa-dice"></i>';
+                avatar.innerHTML = '<i class="fas fa-crown"></i>';
+                heroName.textContent = 'Дима Бучин';
+                heroDesc.innerHTML = '<i class="fas fa-star"></i> рандом ученик 9а класса <i class="fas fa-star"></i>';
+                timerLabel.innerHTML = '<i class="fas fa-hourglass-half"></i> Следующее узнавание через';
+                
+                // Загружаем сохранённые данные
+                const hasSavedData = loadSavedData();
+                
+                if (!hasSavedData) {
+                    resultTextEl.innerHTML = '<i class="fas fa-question"></i> <i class="fas fa-question"></i> <i class="fas fa-question"></i>';
+                    lastResultEl.innerHTML = '<i class="fas fa-question"></i>';
+                    verdictGlowEl.innerHTML = '<i class="fas fa-question"></i>';
+                }
+                
+                resultSubEl.innerHTML = '<i class="fas fa-hand-pointer"></i> нажми, чтобы узнать кто ты на сегодня';
+                
+                // Обновляем таймер
+                updateTimerForCurrentTab();
+            }
+
+            // Переключение на любовную вкладку
+            function switchToLoveTab() {
+                currentTab = 'love';
+                localStorage.setItem(CURRENT_TAB_KEY, 'love');
+                
+                // Обновляем UI
+                document.body.classList.add('love-mode');
+                tabLove.classList.add('active');
+                tabMain.classList.remove('active');
+                
+                mainTitle.textContent = 'ЛЮБОВНАЯ РУЛЕТКА';
+                subtitle.innerHTML = '<i class="fas fa-heart"></i> кто сегодня твоя девушка <i class="fas fa-heart"></i>';
+                avatar.innerHTML = '<i class="fas fa-heart"></i>';
+                heroName.textContent = 'Дима Бучин';
+                heroDesc.innerHTML = '<i class="fas fa-heart"></i> сердцеед <i class="fas fa-heart"></i>';
+                timerLabel.innerHTML = '<i class="fas fa-hourglass-half"></i> Следующая девушка через';
+                
+                // Загружаем сохранённые данные
+                const hasSavedData = loadSavedData();
+                
+                if (!hasSavedData) {
+                    resultTextEl.innerHTML = '<i class="fas fa-question"></i> <i class="fas fa-question"></i> <i class="fas fa-question"></i>';
+                    lastResultEl.innerHTML = '<i class="fas fa-question"></i>';
+                    verdictGlowEl.innerHTML = '<i class="fas fa-question"></i>';
+                }
+                
+                resultSubEl.innerHTML = '<i class="fas fa-hand-pointer"></i> нажми, чтобы узнать кто твоя девушка';
+                
+                // Обновляем таймер
+                updateTimerForCurrentTab();
             }
 
             // Функция обновления интерфейса при кручении
@@ -677,7 +1078,12 @@
 
                 // Добавляем класс анимации
                 resultTextEl.classList.add('spinning');
-                resultSubEl.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Определяем твою кликуху на день...';
+                
+                if (currentTab === 'main') {
+                    resultSubEl.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Определяем твою кликуху на день...';
+                } else {
+                    resultSubEl.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Ищем твою девушку...';
+                }
 
                 // Блокируем кнопку на время "кручения"
                 spinBtn.disabled = true;
@@ -691,36 +1097,48 @@
                     resultTextEl.innerHTML = outcome.fullDisplay;
                     
                     // Обновляем подпись
-                    resultSubEl.innerHTML = '<i class="fas fa-check-circle"></i> твоя кликуха на сегодня определена';
-                    
-                    // Обновляем статус-бар (последний результат - иконка)
-                    lastResultEl.innerHTML = `<i class="fas ${outcome.icon}"></i>`;
-                    
-                    // Вердикт в зависимости от результата
-                    if (outcome.type === 'good') {
-                        verdictGlowEl.innerHTML = '<i class="fas fa-check-circle" style="color: #4cd964;"></i> <i class="fas fa-thumbs-up" style="color: #4cd964;"></i>';
+                    if (currentTab === 'main') {
+                        resultSubEl.innerHTML = '<i class="fas fa-check-circle"></i> твоя кликуха на сегодня определена';
                     } else {
-                        verdictGlowEl.innerHTML = '<i class="fas fa-times-circle" style="color: #ff3b30;"></i> <i class="fas fa-thumbs-down" style="color: #ff3b30;"></i>';
+                        resultSubEl.innerHTML = '<i class="fas fa-check-circle"></i> твоя девушка на сегодня найдена';
+                    }
+                    
+                    // Обновляем статус-бар - теперь показываем ИМЯ/КЛИЧКУ, а не иконку
+                    lastResultEl.innerHTML = outcome.text;
+                    
+                    // Вердикт в зависимости от вкладки
+                    if (currentTab === 'main') {
+                        if (outcome.type === 'good') {
+                            verdictGlowEl.innerHTML = '<i class="fas fa-check-circle" style="color: #4cd964;"></i> <i class="fas fa-thumbs-up" style="color: #4cd964;"></i>';
+                        } else {
+                            verdictGlowEl.innerHTML = '<i class="fas fa-times-circle" style="color: #ff3b30;"></i> <i class="fas fa-thumbs-down" style="color: #ff3b30;"></i>';
+                        }
+                    } else {
+                        verdictGlowEl.innerHTML = '<i class="fas fa-heart" style="color: #c45d7a;"></i> <i class="fas fa-heart" style="color: #c45d7a;"></i>';
                     }
 
                     // Убираем анимацию
                     resultTextEl.classList.remove('spinning');
                     
-                    // Сохраняем время кручения (таймер запустится ТОЛЬКО здесь)
-                    saveSpinTime();
+                    // Сохраняем время кручения и результат
+                    saveSpinData(outcome);
                     
                 }, 800); // 0.8 секунды эффекта
             }
 
-            // Назначаем обработчик на кнопку - УБЕДИМСЯ, ЧТО ОН НАЗНАЧЕН ПРАВИЛЬНО
+            // Назначаем обработчики на вкладки
+            tabMain.addEventListener('click', switchToMainTab);
+            tabLove.addEventListener('click', switchToLoveTab);
+
+            // Назначаем обработчик на кнопку
             if (spinBtn) {
                 spinBtn.addEventListener('click', spinWheel);
-                console.log('Обработчик назначен'); // Для отладки
+                console.log('Обработчик назначен');
             } else {
                 console.error('Кнопка не найдена!');
             }
 
-            // Для мобильных устройств убираем hover эффекты
+            // Для мобильных устройств
             if ('ontouchstart' in window) {
                 document.querySelectorAll('button').forEach(btn => {
                     btn.addEventListener('touchstart', function(e) {
@@ -731,22 +1149,15 @@
 
             // Загрузка сайта с экраном загрузки
             window.addEventListener('load', function() {
-                console.log('Страница загружена'); // Для отладки
+                console.log('Страница загружена');
                 
-                // Устанавливаем начальные значения
-                resultTextEl.innerHTML = '<i class="fas fa-question"></i> <i class="fas fa-question"></i> <i class="fas fa-question"></i>';
-                resultSubEl.innerHTML = '<i class="fas fa-hand-pointer"></i> нажми, чтобы узнать кто ты на сегодня';
-                lastResultEl.innerHTML = '<i class="fas fa-question"></i>';
-                verdictGlowEl.innerHTML = '<i class="fas fa-question"></i>';
+                // Проверяем сохранённую вкладку
+                const savedTab = localStorage.getItem(CURRENT_TAB_KEY);
                 
-                // Проверяем, можно ли крутить
-                if (!canSpin()) {
-                    // Если есть сохранённое время, но таймер ещё не запущен
-                    spinBtn.disabled = true;
-                    timerDisplay.innerHTML = '<i class="fas fa-hourglass-half"></i> Ожидание...';
+                if (savedTab === 'love') {
+                    switchToLoveTab();
                 } else {
-                    spinBtn.disabled = false;
-                    timerDisplay.innerHTML = '<i class="fas fa-check-circle" style="color: #4cd964;"></i> ГОТОВО!';
+                    switchToMainTab();
                 }
                 
                 // Показываем загрузку 2.5 секунды
@@ -755,15 +1166,6 @@
                     mainContent.classList.add('visible');
                 }, 2500);
             });
-
-            // Дополнительная проверка, что кнопка не заблокирована по умолчанию
-            // Это перестраховка
-            setTimeout(function() {
-                if (spinBtn && canSpin()) {
-                    spinBtn.disabled = false;
-                    console.log('Кнопка разблокирована');
-                }
-            }, 3000);
         })();
     </script>
 </body>
