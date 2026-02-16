@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>BuchinWeb</title>
+    <!-- Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, 'Segoe UI', 'Roboto', system-ui, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at 30% 10%, #3a3f4a 0%, #1a1d23 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px;
+        }
+
+        /* Основной стеклянный контейнер */
+        .glass-panel {
+            background: rgba(45, 50, 60, 0.25);
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            border: 1px solid rgba(220, 230, 255, 0.15);
+            border-radius: 48px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.08);
+            padding: 24px;
+            max-width: 800px;
+            width: 100%;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Заголовок */
+        .title-section {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .title-section h1 {
+            font-size: clamp(2.2rem, 10vw, 3.5rem);
+            font-weight: 600;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #e8eef5 0%, #a5b3c9 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            margin-bottom: 8px;
+            line-height: 1.1;
+        }
+
+        .title-section .subtitle {
+            color: #b0b9cc;
+            font-weight: 300;
+            font-size: clamp(1rem, 4vw, 1.2rem);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 16px;
+        }
+
+        .title-section .subtitle i {
+            margin: 0 5px;
+        }
+
+        /* Блок с аватаркой и именем */
+        .hero {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 30px;
+            background: rgba(20, 25, 35, 0.3);
+            border-radius: 100px;
+            padding: 12px 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .hero:hover {
+            background: rgba(40, 50, 70, 0.4);
+            border-color: rgba(255,255,255,0.15);
+        }
+
+        .avatar {
+            width: 70px;
+            height: 70px;
+            min-width: 70px;
+            background: linear-gradient(145deg, #4a5366, #2f3542);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #cad1e0;
+            border: 2px solid rgba(255,255,255,0.2);
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.6);
+        }
+
+        .name-info h2 {
+            color: white;
+            font-size: clamp(1.5rem, 6vw, 2rem);
+            font-weight: 500;
+            letter-spacing: 1px;
+            word-break: break-word;
+        }
+
+        .name-info p {
+            color: #9aa7bc;
+            font-style: italic;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+        }
+
+        /* Рулетка */
+        .wheel-container {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 60px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: inset 0 5px 10px rgba(0,0,0,0.4);
+        }
+
+        .wheel-display {
+            background: #1e2128;
+            border-radius: 40px;
+            padding: 20px 16px;
+            text-align: center;
+            border: 1px solid #5f6b80;
+            box-shadow: 0 0 0 2px #2c313a, 0 15px 30px -10px black;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .result-text {
+            font-size: clamp(2rem, 8vw, 4rem);
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #eceff7;
+            text-shadow: 0 0 10px rgba(210, 230, 255, 0.5);
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            word-break: break-word;
+            line-height: 1.3;
+        }
+
+        .result-text i {
+            font-size: clamp(2rem, 8vw, 4rem);
+            margin: 0 5px;
+        }
+
+        .result-sub {
+            font-size: clamp(1.1rem, 4vw, 1.5rem);
+            color: #a1aec9;
+            margin-top: 8px;
+        }
+
+        /* Таймер */
+        .timer-container {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .timer-label {
+            color: #b0b9cc;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .timer-display {
+            font-size: clamp(1.5rem, 6vw, 2.5rem);
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(100, 150, 255, 0.5);
+            font-family: monospace;
+            letter-spacing: 5px;
+        }
+
+        .timer-display i {
+            margin-right: 10px;
+            color: #a1aec9;
+        }
+
+        /* Кнопка */
+        .spin-button {
+            display: flex;
+            justify-content: center;
+        }
+
+        button {
+            background: rgba(60, 70, 90, 0.4);
+            backdrop-filter: blur(8px);
+            border: 2px solid rgba(220, 230, 255, 0.2);
+            padding: 18px 30px;
+            border-radius: 60px;
+            font-size: clamp(1.5rem, 6vw, 2rem);
+            font-weight: 600;
+            color: #dfe7f5;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            box-shadow: 0 15px 25px -8px black, 0 4px 0 #2e3440 inset, 0 -2px 0 #5f6b80 inset;
+            transition: all 0.2s ease;
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        button:hover {
+            background: rgba(80, 92, 115, 0.5);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: white;
+            box-shadow: 0 15px 30px -5px rgba(100, 150, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(4px);
+            box-shadow: 0 5px 10px -3px black;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            transform: none;
+            pointer-events: none;
+        }
+
+        button i {
+            font-size: clamp(1.5rem, 6vw, 2rem);
+        }
+
+        /* Статистика */
+        .status-bar {
+            display: flex;
+            flex-direction: row;
+            gap: 12px;
+            margin-top: 24px;
+            color: #b8c3d9;
+            font-weight: 400;
+        }
+
+        .status-item {
+            background: rgba(25, 30, 40, 0.5);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 10px 12px;
+            border-radius: 40px;
+            flex: 1;
+            text-align: center;
+            font-size: clamp(0.9rem, 3vw, 1.2rem);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            flex-wrap: wrap;
+            transition: all 0.3s ease;
+        }
+
+        .status-item:hover {
+            background: rgba(45, 55, 75, 0.7);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .status-item span {
+            color: white;
+            font-weight: 700;
+            font-size: clamp(1.2rem, 5vw, 1.6rem);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .status-item i {
+            font-size: clamp(1.2rem, 5vw, 1.6rem);
+        }
+
+        /* подвал - изменено на мишаня.продакшн */
+        .footer-note {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1rem;
+            color: #b0b9cc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .footer-note i {
+            color: #8a9bb5;
+        }
+
+        .footer-note .brand {
+            font-weight: 600;
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(100, 150, 255, 0.5);
+        }
+
+        /* Анимация мерцания для spinning (только при кручении) */
+        @keyframes pulseGlow {
+            0% { text-shadow: 0 0 5px rgba(210, 230, 255, 0.3); }
+            50% { text-shadow: 0 0 25px rgba(210, 230, 255, 0.9); }
+            100% { text-shadow: 0 0 5px rgba(210, 230, 255, 0.3); }
+        }
+
+        .result-text.spinning {
+            animation: pulseGlow 0.6s infinite;
+            color: #ffffff;
+        }
+
+        /* Адаптация для маленьких экранов */
+        @media (max-width: 480px) {
+            .glass-panel {
+                padding: 16px;
+                border-radius: 32px;
+            }
+            
+            .hero {
+                padding: 8px 16px;
+            }
+            
+            .avatar {
+                width: 60px;
+                height: 60px;
+                min-width: 60px;
+                font-size: 2rem;
+            }
+            
+            .wheel-container {
+                padding: 12px;
+            }
+            
+            .status-bar {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .status-item {
+                justify-content: flex-start;
+                padding: 12px;
+            }
+        }
+
+        /* Для iPhone в ландшафтной ориентации */
+        @media (max-height: 500px) and (orientation: landscape) {
+            body {
+                padding: 8px;
+            }
+            
+            .glass-panel {
+                padding: 12px;
+            }
+            
+            .hero {
+                margin-bottom: 15px;
+            }
+            
+            .wheel-container {
+                margin-bottom: 15px;
+            }
+            
+            .result-text {
+                min-height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glass-panel">
+        <div class="title-section">
+            <h1>ДИМА БУЧИН</h1>
+            <div class="subtitle">
+                <i class="fas fa-dice"></i> рулетка хуйни <i class="fas fa-dice"></i>
+            </div>
+        </div>
+
+        <div class="hero">
+            <div class="avatar">
+                <i class="fas fa-crown"></i>
+            </div>
+            <div class="name-info">
+                <h2>Дима Бучин</h2>
+                <p><i class="fas fa-star"></i> рандом ученик 9а класса <i class="fas fa-star"></i></p>
+            </div>
+        </div>
+
+        <!-- Таймер -->
+        <div class="timer-container">
+            <div class="timer-label">
+                <i class="fas fa-hourglass-half"></i> Следующее кручение через
+            </div>
+            <div class="timer-display" id="timerDisplay">
+                <i class="fas fa-clock"></i> 12:00:00
+            </div>
+        </div>
+
+        <div class="wheel-container">
+            <div class="wheel-display" id="wheelDisplay">
+                <div class="result-text" id="resultText">
+                    <i class="fas fa-bolt"></i>
+                    <i class="fas fa-hourglass-half"></i>
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="result-sub" id="resultSub">
+                    <i class="fas fa-hand-pointer"></i> крути рулетку, пацан
+                </div>
+            </div>
+
+            <div class="spin-button">
+                <button id="spinBtn">
+                    <i class="fas fa-sync-alt"></i> Крутить <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="status-bar">
+            <div class="status-item">
+                <i class="fas fa-history"></i> Последний: <span id="lastResult"><i class="fas fa-question"></i></span>
+            </div>
+            <div class="status-item">
+                <i class="fas fa-balance-scale"></i> Вердикт: <span id="verdictGlow"><i class="fas fa-bolt"></i></span>
+            </div>
+        </div>
+
+        <!-- Изменено на мишаня.продакшн -->
+        <div class="footer-note">
+            <i class="fas fa-copyright"></i>
+            <span class="brand">мишаня.продакшн</span>
+            <i class="fas fa-registered"></i>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // 6 кличек: 3 плохих, 3 хороших
+            const outcomes = [
+                // Плохие (3 штуки)
+                { text: "ЛОХ", icon: "fa-face-frown", fullDisplay: '<i class="fas fa-face-frown"></i> ЛОХ <i class="fas fa-droplet"></i>', value: "loch", type: "bad" },
+                { text: "ПЕДИК", icon: "fa-rainbow", fullDisplay: '<i class="fas fa-rainbow"></i> ПЕДИК <i class="fas fa-rainbow"></i>', value: "pedik", type: "bad" },
+                { text: "КУКОЛД", icon: "fa-horn-ram", fullDisplay: '<i class="fas fa-horn-ram"></i> КУКОЛД <i class="fas fa-horn-ram"></i>', value: "cuckold", type: "bad" },
+                
+                // Хорошие (3 штуки)
+                { text: "КОРОЛЬ", icon: "fa-crown", fullDisplay: '<i class="fas fa-crown"></i> КОРОЛЬ <i class="fas fa-crown"></i>', value: "king", type: "good" },
+                { text: "ПАЦАН", icon: "fa-hat-cowboy", fullDisplay: '<i class="fas fa-hat-cowboy"></i> ПАЦАН <i class="fas fa-fire"></i>', value: "pacan", type: "good" },
+                { text: "КРАСАВЧИК", icon: "fa-face-smile-wink", fullDisplay: '<i class="fas fa-face-smile-wink"></i> КРАСАВЧИК <i class="fas fa-heart"></i>', value: "handsome", type: "good" }
+            ];
+
+            const resultTextEl = document.getElementById('resultText');
+            const resultSubEl = document.getElementById('resultSub');
+            const lastResultEl = document.getElementById('lastResult');
+            const verdictGlowEl = document.getElementById('verdictGlow');
+            const spinBtn = document.getElementById('spinBtn');
+            const timerDisplay = document.getElementById('timerDisplay');
+
+            let lastOutcome = null;
+            let timerInterval = null;
+            
+            // Ключ для localStorage
+            const STORAGE_KEY = 'buchin_last_spin_time';
+            const COOLDOWN_HOURS = 12;
+            const COOLDOWN_MS = COOLDOWN_HOURS * 60 * 60 * 1000;
+
+            // Функция для получения случайного элемента
+            function getRandomOutcome() {
+                return outcomes[Math.floor(Math.random() * outcomes.length)];
+            }
+
+            // Проверка, можно ли крутить
+            function canSpin() {
+                const lastSpinTime = localStorage.getItem(STORAGE_KEY);
+                if (!lastSpinTime) return true;
+                
+                const now = Date.now();
+                const timeSinceLastSpin = now - parseInt(lastSpinTime);
+                return timeSinceLastSpin >= COOLDOWN_MS;
+            }
+
+            // Получение оставшегося времени в мс
+            function getRemainingTime() {
+                const lastSpinTime = localStorage.getItem(STORAGE_KEY);
+                if (!lastSpinTime) return 0;
+                
+                const now = Date.now();
+                const timeSinceLastSpin = now - parseInt(lastSpinTime);
+                const remaining = COOLDOWN_MS - timeSinceLastSpin;
+                return remaining > 0 ? remaining : 0;
+            }
+
+            // Форматирование времени (ЧЧ:ММ:СС)
+            function formatTime(ms) {
+                if (ms <= 0) return "00:00:00";
+                
+                const totalSeconds = Math.floor(ms / 1000);
+                const hours = Math.floor(totalSeconds / 3600);
+                const minutes = Math.floor((totalSeconds % 3600) / 60);
+                const seconds = totalSeconds % 60;
+                
+                return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+
+            // Обновление таймера и состояния кнопки
+            function updateTimerAndButton() {
+                const remaining = getRemainingTime();
+                
+                if (remaining > 0) {
+                    // Таймер активен
+                    timerDisplay.innerHTML = `<i class="fas fa-hourglass-half"></i> ${formatTime(remaining)}`;
+                    spinBtn.disabled = true;
+                } else {
+                    // Можно крутить
+                    timerDisplay.innerHTML = `<i class="fas fa-check-circle" style="color: #4cd964;"></i> ГОТОВО!`;
+                    spinBtn.disabled = false;
+                }
+            }
+
+            // Запуск таймера (обновление каждую секунду)
+            function startTimer() {
+                if (timerInterval) clearInterval(timerInterval);
+                
+                updateTimerAndButton();
+                
+                timerInterval = setInterval(() => {
+                    updateTimerAndButton();
+                }, 1000);
+            }
+
+            // Сохранение времени кручения
+            function saveSpinTime() {
+                localStorage.setItem(STORAGE_KEY, Date.now().toString());
+                startTimer(); // Перезапускаем таймер
+            }
+
+            // Функция обновления интерфейса при кручении
+            function spinWheel() {
+                if (!canSpin()) {
+                    // Если ещё нельзя крутить, показываем сообщение
+                    resultSubEl.innerHTML = '<i class="fas fa-exclamation-triangle" style="color: #ff3b30;"></i> Подожди 12 часов!';
+                    return;
+                }
+
+                // Добавляем класс анимации
+                resultTextEl.classList.add('spinning');
+                resultSubEl.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> решает судьбу...';
+
+                // Блокируем кнопку на время "кручения"
+                spinBtn.disabled = true;
+
+                // Имитация задержки рулетки (эффект ожидания)
+                setTimeout(() => {
+                    const outcome = getRandomOutcome();
+                    lastOutcome = outcome;
+
+                    // Обновляем основной результат
+                    resultTextEl.innerHTML = outcome.fullDisplay;
+                    
+                    // Обновляем подпись
+                    resultSubEl.innerHTML = '<i class="fas fa-check-circle"></i> судьба Димы Бучина решена';
+                    
+                    // Обновляем статус-бар (последний результат - иконка)
+                    lastResultEl.innerHTML = `<i class="fas ${outcome.icon}"></i>`;
+                    
+                    // Вердикт в зависимости от результата
+                    if (outcome.type === 'good') {
+                        verdictGlowEl.innerHTML = '<i class="fas fa-check-circle" style="color: #4cd964;"></i> <i class="fas fa-thumbs-up" style="color: #4cd964;"></i>';
+                    } else {
+                        verdictGlowEl.innerHTML = '<i class="fas fa-times-circle" style="color: #ff3b30;"></i> <i class="fas fa-thumbs-down" style="color: #ff3b30;"></i>';
+                    }
+
+                    // Убираем анимацию
+                    resultTextEl.classList.remove('spinning');
+                    
+                    // Сохраняем время кручения и запускаем таймер
+                    saveSpinTime();
+                    
+                }, 800); // 0.8 секунды эффекта
+            }
+
+            // Назначаем обработчик на кнопку
+            spinBtn.addEventListener('click', spinWheel);
+
+            // Для мобильных устройств убираем hover эффекты
+            if ('ontouchstart' in window) {
+                document.querySelectorAll('button').forEach(btn => {
+                    btn.addEventListener('touchstart', function() {
+                        // просто убираем hover-эффекты
+                    });
+                });
+            }
+
+            // Инициализация при загрузке
+            function init() {
+                // Проверяем, можно ли крутить
+                if (!canSpin()) {
+                    spinBtn.disabled = true;
+                }
+                
+                // Запускаем таймер
+                startTimer();
+                
+                // Показываем случайный начальный результат (но без сохранения времени)
+                const initial = outcomes[Math.floor(Math.random() * outcomes.length)];
+                resultTextEl.innerHTML = initial.fullDisplay;
+                lastResultEl.innerHTML = `<i class="fas ${initial.icon}"></i>`;
+                if (initial.type === 'good') {
+                    verdictGlowEl.innerHTML = '<i class="fas fa-check-circle" style="color: #4cd964;"></i>';
+                } else {
+                    verdictGlowEl.innerHTML = '<i class="fas fa-times-circle" style="color: #ff3b30;"></i>';
+                }
+            }
+
+            init();
+        })();
+    </script>
+</body>
+</html>
